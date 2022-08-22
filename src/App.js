@@ -1,37 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-import NumberBoard from './components/NumberBoard';
+import TileBoard from './components/TileBoard';
 import { useState } from 'react';
-
-const range = (min, max) => Array.from({ length: max - min + 1 }, (_, i) => min + i);
-const NUM_DIGITS = 5;
-const MAX_NUM_ROWS = 5;
+import { MAX_NUM_ROWS, NUM_COLORS, COLORS, GAME_STATE } from './constants';
 
 function App() {
   const [rows, setRows] = useState(Array(MAX_NUM_ROWS).fill({
-    numbers: [],
+    tiles: [],
     correct: 0,
     wrong: 0,
   }));
   const [currentRow, setCurrentRow] = useState(0);
-  const [currentDigit, setCurrentDigit] = useState(0);
-  const [answer, setAnswer] = useState(['1', '2', '3', '4', '5']);
+  const [currentTile, setCurrentTile] = useState(0);
+  const [answer] = useState(['red', 'green', 'blue', 'black']);
+  const [gameState, setGameState] = useState(GAME_STATE.PLAYING);
 
   function checkRow() {
     let correct = 0;
-    let checked = Array(NUM_DIGITS).fill(false);
+    let wrong = 0;
+    let checked = Array(NUM_COLORS).fill(false);
 
-    for (let i = 0; i < NUM_DIGITS; i++) {
-      if (rows[currentRow].numbers[i].value === answer[i]) {
+    for (let i = 0; i < NUM_COLORS; i++) {
+      if (rows[currentRow].tiles[i].value === answer[i]) {
         checked[i] = true;
         correct++;
       }
     }
 
-    let wrong = 0;
-    for (let i = 0; i < NUM_DIGITS; i++) {
-      for (let j = 0; j < NUM_DIGITS; j++) {
-        if (rows[currentRow].numbers[i].value === answer[j] && i !== j && !checked[j]) {
+    for (let i = 0; i < NUM_COLORS; i++) {
+      for (let j = 0; j < NUM_COLORS; j++) {
+        if (rows[currentRow].tiles[i].value === answer[j] && i !== j && !checked[j]) {
           checked[j] = true;
           wrong++;
         }
@@ -42,40 +39,48 @@ function App() {
       current.map((row, idx) =>
         idx === currentRow ?
           {
-            ...row,
+            tiles: row.tiles.map(tile => { return { ...tile, status: 'checked' }; }),
             correct,
             wrong,
           }
           : row
       ));
 
+    return correct;
   }
 
   function handleKeyClick(e) {
+    if (gameState !== GAME_STATE.PLAYING) return;
     switch (e.target.id) {
       case 'enter':
-        if (currentDigit === NUM_DIGITS) {
-          checkRow();
+        if (currentTile === NUM_COLORS) {
+          if (checkRow() === NUM_COLORS) {
+            setGameState(GAME_STATE.WON)
+            return;
+          } else if (currentRow === MAX_NUM_ROWS - 1) {
+            setGameState(GAME_STATE.LOST);
+            return;
+          }
           setCurrentRow(curr => curr + 1);
-          setCurrentDigit(0);
+          setCurrentTile(0);
         }
         break;
       case 'del':
-        if (rows[currentRow].numbers.length > 0) {
+        if (rows[currentRow].tiles.length > 0) {
           setRows(curr =>
             curr.map((row, idx) =>
-              idx === currentRow ? { ...row, numbers: row.numbers.slice(0, -1) } : row
+              idx === currentRow ? { ...row, tiles: row.tiles.slice(0, -1) } : row
             )
           );
-          setCurrentDigit(curr => curr - 1);
+          setCurrentTile(curr => curr - 1);
         }
         break;
       default:
-        if (currentDigit < NUM_DIGITS) {
+        if (currentTile < NUM_COLORS) {
           setRows(curr =>
             curr.map((row, idx) =>
               idx === currentRow ? {
-                ...row, numbers: [...row.numbers, {
+                ...row, tiles: [...row.tiles, {
                   value: e.target.id,
                   status: 'unchecked',
                 }]
@@ -83,24 +88,26 @@ function App() {
             )
           );
 
-          setCurrentDigit(curr => curr + 1);
+          setCurrentTile(curr => curr + 1);
         }
         break;
     }
   }
 
+  // if (gameState === GAME_STATE.WON) return <h1>You Won!</h1>;
+  // if (gameState === GAME_STATE.LOST) return <h1>You Lost!</h1>;
+
   return (
     <div className='gameContainer'>
       <header>Header</header>
       <main>
-        <NumberBoard rows={rows} />
+        <TileBoard rows={rows} />
         <div className='keypadRow'>
           <div onClick={handleKeyClick} id='enter' className='key enterKey'>
             enter
           </div>
-          {range(0, 9).map(key =>
-            <div key={key} id={key} onClick={handleKeyClick} className='key'>
-              {key}
+          {Object.keys(COLORS).map(key =>
+            <div key={key} id={key} style={{ backgroundColor: COLORS[key] }} onClick={handleKeyClick} className='key'>
             </div>
           )}
           <div onClick={handleKeyClick} id='del' className='key enterKey'>

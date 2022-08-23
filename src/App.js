@@ -1,7 +1,9 @@
 import './App.css';
 import TileBoard from './components/TileBoard';
 import { useState } from 'react';
-import { MAX_NUM_ROWS, NUM_COLORS, COLORS, GAME_STATE } from './constants';
+import { MAX_NUM_ROWS, NUM_COLORS, GAME_STATE } from './constants';
+import Keypad from './components/Keypad';
+import Toast from './components/Toast';
 
 function App() {
   const [rows, setRows] = useState(Array(MAX_NUM_ROWS).fill({
@@ -13,6 +15,7 @@ function App() {
   const [currentTile, setCurrentTile] = useState(0);
   const [answer] = useState(['red', 'green', 'blue', 'black']);
   const [gameState, setGameState] = useState(GAME_STATE.PLAYING);
+  const [toast, setToast] = useState({display: false, message: ''});
 
   function checkRow() {
     let correct = 0;
@@ -56,9 +59,17 @@ function App() {
         if (currentTile === NUM_COLORS) {
           if (checkRow() === NUM_COLORS) {
             setGameState(GAME_STATE.WON)
+            setToast({
+              display: true,
+              message: 'You Won!',
+            })
             return;
           } else if (currentRow === MAX_NUM_ROWS - 1) {
             setGameState(GAME_STATE.LOST);
+            setToast({
+              display: true,
+              message: 'You Lost 😞',
+            })
             return;
           }
           setCurrentRow(curr => curr + 1);
@@ -98,24 +109,16 @@ function App() {
   // if (gameState === GAME_STATE.LOST) return <h1>You Lost!</h1>;
 
   return (
+    <>
     <div className='gameContainer'>
       <header>Header</header>
       <main>
         <TileBoard rows={rows} />
-        <div className='keypadRow'>
-          <div onClick={handleKeyClick} id='enter' className='key enterKey'>
-            enter
-          </div>
-          {Object.keys(COLORS).map(key =>
-            <div key={key} id={key} style={{ backgroundColor: COLORS[key] }} onClick={handleKeyClick} className='key'>
-            </div>
-          )}
-          <div onClick={handleKeyClick} id='del' className='key enterKey'>
-            del
-          </div>
-        </div>
+        <Keypad handleKeyClick={handleKeyClick} />
       </main>
     </div>
+    <Toast toast={toast} setToast={setToast} />
+    </>
   );
 }
 

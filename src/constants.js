@@ -1,5 +1,5 @@
 const NUM_COLORS = 4;
-const MAX_NUM_ROWS = 8;
+const MAX_NUM_ROWS = 10;
 
 const GAME_STATE = {
     PLAYING: 'playing',

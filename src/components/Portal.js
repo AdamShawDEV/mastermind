@@ -3,9 +3,9 @@ import reactDom from "react-dom";
 
 function Portal({ children, wrapperId = "react-portalid" }) {
     const [wrapperElement, setWrapperElement] = useState(null);
-    let systemCreated = false;
 
     useEffect(() => {
+        let systemCreated = false;
         let element = document.getElementById(wrapperId);
 
         if(!element) {

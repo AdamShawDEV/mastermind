@@ -1,0 +1,30 @@
+.keypadRow {
+    height: 3rem;
+    padding: .4rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .key {
+    cursor: pointer;
+    padding: .9rem;
+    min-width: fit-content;
+    max-width: 1.9rem;
+    flex-grow: 1;
+    background-color: #a2a2a2;
+    margin-right: .6rem;
+    border-radius: .4rem;
+    font-weight: 700;
+  }
+
+  .key:hover {
+    transform: translate(-.2rem, -.2rem);
+    box-shadow: 4px 4px 4px rgba(4, 3, 3, 0.524);
+    transition: transform .2s, box-shadow .2s;
+  }
+
+  .key:active {
+    transition: transform 0s, box-shadow 0s;
+    transform: translate(-.05rem, -.05rem);
+    box-shadow: 1px 1px 1px rgba(4, 3, 3, 0.524);
+  }

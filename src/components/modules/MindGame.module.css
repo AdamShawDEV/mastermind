@@ -1,0 +1,13 @@
+.answerContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: .2rem;
+    gap: .2rem;
+}
+
+.answerTile {
+    height: 1rem;
+    width: 1rem;
+    border-radius: .4rem;
+    border: 1px solid #000;
+}

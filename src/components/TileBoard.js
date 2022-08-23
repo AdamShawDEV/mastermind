@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import { NUM_COLORS, COLORS } from "../constants";
+import styles from './modules/TileBoard.module.css';
 
 function Row({ row }) {
     const { tiles, correct, wrong } = row;
@@ -14,19 +14,19 @@ function Row({ row }) {
     }
 
     return (
-        <div className='tileRow'>
+        <div className={styles.tileRow}>
             {rowTiles.map((tile, idx) =>
-                <div key={idx} className='tileContainer'>
-                    {tile.value ? <div className={tile.status === 'checked' ?  "tileChecked" : 'tileUnchecked'} style={{ backgroundColor: COLORS[tile.value] }}>
+                <div key={idx} className={styles.tileContainer}>
+                    {tile.value ? <div className={`${styles.tile} ${tile.status === 'checked' ?  styles.tileChecked : styles.tileUnchecked}`} style={{ backgroundColor: COLORS[tile.value] }}>
                     </div> : null}
                 </div>
             )}
-            <div className="rowScoreContainer">
+            <div className={styles.rowScoreContainer}>
                 {Array(correct).fill("").map((_, idx) =>
-                    <div key={idx} className="pin correct" />
+                    <div key={idx} className={`${styles.pin} ${styles.correct}`} />
                 )}
                 {Array(wrong).fill("").map((_, idx) =>
-                    <div key={idx} className="pin wrong"></div>
+                    <div key={idx} className={`${styles.pin} ${styles.wrong}`} ></div>
                 )}
             </div>
         </div >
@@ -36,7 +36,7 @@ function Row({ row }) {
 function NumberBoard({ rows }) {
 
     return (
-        <div className="rowContainer">
+        <div className={styles.rowContainer}>
             {rows.map((row, idx) =>
                 <Row key={idx} row={row} />
             )}

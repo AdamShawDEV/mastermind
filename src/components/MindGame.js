@@ -63,7 +63,7 @@ function MindGame({ startNewGame, answer }) {
                         setGameState(GAME_STATE.WON)
                         setToast({
                             display: true,
-                            message: 'You Won!',
+                            message: 'You Won! 😀',
                         })
                         return;
                     } else if (currentRow === MAX_NUM_ROWS - 1) {
@@ -117,7 +117,7 @@ function MindGame({ startNewGame, answer }) {
                         <div key={idx} className={styles.answerTile} style={{backgroundColor: COLORS[tile]}}></div>
                     )}
                 </div>
-                <button onClick={startNewGame}>New Game</button>
+                <button className={styles.newGameButton} onClick={startNewGame}>New Game</button>
             </Toast>}
         </>
     );

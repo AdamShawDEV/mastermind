@@ -1,6 +1,6 @@
 .answerContainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: .2rem;
     gap: .2rem;
 }
@@ -10,4 +10,21 @@
     width: 1rem;
     border-radius: .4rem;
     border: 1px solid #000;
+}
+
+.newGameButton {
+    color: #fff;
+    font-weight: 700;
+    background-color: #757575;
+    padding: .7rem;
+    border: none;
+    border-radius: .4rem;
+}
+
+.newGameButton:hover {
+    background-color: #c4c4c4;
+}
+
+.newGameButton:active {
+    background-color: #414141;
 }

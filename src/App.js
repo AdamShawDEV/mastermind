@@ -21,7 +21,7 @@ function App() {
   return (
     <>
     <div className='gameContainer'>
-      <header>Mastermind</header>
+      <header><span className='title'>Mastermind</span></header>
       <main>
         <MindGame key={key} startNewGame={() => setKey(curr => curr + 1)}  answer={newGame()} />
       </main>

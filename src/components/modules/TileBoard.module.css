@@ -18,6 +18,7 @@
   .tile {
     /* transition-timing-function: ease-out; */
     transition: width .5s, height .5s;
+    border-radius: .4rem;
   }
   
   .tileChecked {
@@ -28,7 +29,6 @@
   .tileUnchecked{
     width: 40%;
     height: 40%;
-    border-radius: .4rem;
   }
 
   .rowContainer {

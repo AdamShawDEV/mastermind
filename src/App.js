@@ -1,13 +1,13 @@
 import './App.css';
 import MindGame from './components/MindGame';
-import { COLORS, NUM_COLORS } from './constants';
+import { COLORS, NUM_COLS } from './constants';
 import { useState } from 'react';
 
 function newGame() {
   let out = [];
   const keys = Object.keys(COLORS);
 
-  for (let i = 0; i < NUM_COLORS; i++) {
+  for (let i = 0; i < NUM_COLS; i++) {
     const idx = Math.floor(Math.random() * keys.length);
     out.push(keys[idx]);
   }

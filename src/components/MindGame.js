@@ -3,7 +3,9 @@ import TileBoard from './TileBoard';
 import { MAX_NUM_ROWS, NUM_COLORS, GAME_STATE, COLORS } from '../constants';
 import Keypad from './Keypad';
 import Toast from './Toast';
+import Modal from './Modal';
 import styles from './modules/MindGame.module.css';
+import useStats from './hooks/useStats';
 
 function MindGame({ startNewGame, answer }) {
     const [rows, setRows] = useState(Array(MAX_NUM_ROWS).fill({
@@ -15,6 +17,7 @@ function MindGame({ startNewGame, answer }) {
     const [currentTile, setCurrentTile] = useState(0);
     const [gameState, setGameState] = useState(GAME_STATE.PLAYING);
     const [toast, setToast] = useState({ display: false, message: '' });
+    const { stats, statsDispatch } = useStats();
 
     function checkRow() {
         let correct = 0;
@@ -56,26 +59,26 @@ function MindGame({ startNewGame, answer }) {
 
     function handleKeyClick(e) {
         if (gameState !== GAME_STATE.PLAYING) return;
+
         switch (e.target.id) {
             case 'enter':
                 if (currentTile === NUM_COLORS) {
                     if (checkRow() === NUM_COLORS) {
-                        setGameState(GAME_STATE.WON)
-                        setToast({
-                            display: true,
-                            message: 'You Won! 😀',
-                        })
+                        setGameState(GAME_STATE.WON);
+                        statsDispatch({ type: 'logWin' });
                         return;
                     } else if (currentRow === MAX_NUM_ROWS - 1) {
                         setGameState(GAME_STATE.LOST);
-                        setToast({
-                            display: true,
-                            message: 'You Lost 😞',
-                        })
+                        statsDispatch({ type: 'logLoss' });
                         return;
                     }
                     setCurrentRow(curr => curr + 1);
                     setCurrentTile(0);
+                } else {
+                    setToast({
+                        display: true,
+                        message: 'Not enough colors.',
+                    });
                 }
                 break;
             case 'del':
@@ -90,16 +93,13 @@ function MindGame({ startNewGame, answer }) {
                 break;
             default:
                 if (currentTile < NUM_COLORS) {
-                    setRows(curr =>
-                        curr.map((row, idx) =>
-                            idx === currentRow ? {
-                                ...row, tiles: [...row.tiles, {
-                                    value: e.target.id,
-                                    status: 'unchecked',
-                                }]
-                            } : row
-                        )
-                    );
+                    setRows(curr => curr.map((row, idx) =>
+                        idx === currentRow ? {
+                            ...row, tiles: [...row.tiles, {
+                                value: e.target.id,
+                                status: 'unchecked',
+                            }]
+                        } : row));
 
                     setCurrentTile(curr => curr + 1);
                 }
@@ -111,14 +111,42 @@ function MindGame({ startNewGame, answer }) {
         <>
             <TileBoard rows={rows} />
             <Keypad handleKeyClick={handleKeyClick} />
-            {gameState !== GAME_STATE.PLAYING && <Toast toast={toast} setToast={setToast}>
-                <div className={styles.answerContainer}>
-                    {answer.map((tile, idx) => 
-                        <div key={idx} className={styles.answerTile} style={{backgroundColor: COLORS[tile]}}></div>
-                    )}
+            <Modal display={gameState !== GAME_STATE.PLAYING} >
+                <div className={styles.message} >
+                    <div>
+                        {gameState === GAME_STATE.WON ?
+                            'You Won! 😀' :
+                            'You Lost 😞'
+                        }
+                    </div>
+                    <div className={styles.answerContainer}>
+                        {answer.map((tile, idx) =>
+                            <div key={idx} className={styles.answerTile} style={{ backgroundColor: COLORS[tile] }}></div>
+                        )}
+                    </div>
+                    <h1 className={styles.statsHeading}>Statistics</h1>
+                    <div className={styles.statsContainer}>
+                        <div className={styles.stat}>
+                            <h2 className={styles.statsSubHeading}>played</h2>
+                            <span>{stats.gamesPlayed}</span>
+                        </div>
+                        <div className={styles.stat}>
+                            <h2 className={styles.statsSubHeading}>won</h2>
+                            <span>{stats.winNum}</span>
+                        </div>
+                        <div className={styles.stat}>
+                            <h2 className={styles.statsSubHeading}>current streak</h2>
+                            <span>{stats.currStreak}</span>
+                        </div>
+                        <div className={styles.stat}>
+                            <h2 className={styles.statsSubHeading}>max streak</h2>
+                            <span>{stats.maxStreak}</span>
+                        </div>
+                    </div>
+                    <button className={styles.newGameButton} onClick={startNewGame}>New Game</button>
                 </div>
-                <button className={styles.newGameButton} onClick={startNewGame}>New Game</button>
-            </Toast>}
+            </Modal>
+            <Toast toast={toast} setToast={setToast} />
         </>
     );
 }

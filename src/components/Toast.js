@@ -2,16 +2,17 @@ import { useEffect } from "react";
 import Portal from "./Portal";
 import styles from './modules/Toast.module.css';
 
-function Toast({ children, toast, setToast, displayTime = null }) {
+function Toast({ toast, setToast, displayTime = 800 }) {
 
     useEffect(() => {
-        if (displayTime) {
+        if (displayTime && toast.display) {
+            console.log('hi');
             const timeoutId = setTimeout(() => setToast({ display: false, message: "" }), displayTime);
 
             return () => clearTimeout(timeoutId);
         }
         //eslint-disable-next-line
-    }, [displayTime]);
+    }, [toast.display, displayTime]);
 
     if (!toast.display) return null;
 
@@ -19,10 +20,7 @@ function Toast({ children, toast, setToast, displayTime = null }) {
         <Portal wrapperId={'toastId'}>
             <div className={styles.toastContainer}>
                 <div className={styles.toastMessage}>
-                    <div>
-                        {toast.message}
-                    </div>
-                    {children}
+                    {toast.message}
                 </div>
             </div>
         </Portal>

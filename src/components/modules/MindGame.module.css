@@ -28,3 +28,33 @@
 .newGameButton:active {
     background-color: #414141;
 }
+
+.message {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.statsHeading {
+    margin-top: .5rem;
+    font-size: 1.5rem;
+}
+
+.statsContainer {
+    display: flex;
+    justify-content: space-around;
+    gap: .4rem;
+    width: 20rem;
+    align-items: flex-end;
+}
+
+.statsSubHeading {
+    font-size: .8rem;
+}
+
+.stat {
+    flex: 1 1 0px;
+}
+
+.stat, .stat span {
+    width:min-content;
+}

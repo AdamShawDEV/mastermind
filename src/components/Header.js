@@ -1,5 +1,5 @@
 import styles from "./modules/Header.module.css";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FiHelpCircle } from "react-icons/fi";
 
 function Header({ setShowInstructions }) {
   return (
@@ -9,7 +9,7 @@ function Header({ setShowInstructions }) {
         className={styles.infoButton}
         onClick={() => setShowInstructions(true)}
       >
-        <AiOutlineInfoCircle />
+        <FiHelpCircle />
       </button>
     </header>
   );

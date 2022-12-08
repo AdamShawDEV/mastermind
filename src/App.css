@@ -3,20 +3,6 @@
   background-color: #777;
 }
 
-header {
-  background-color: #555;
-  padding: 5px;
-  line-height: 0;
-}
-
-.title {
-  /* background-color: red; */
-  font-weight: 700;
-  line-height: 30px;
-  font-size: 30px;
-  vertical-align: top;
-}
-
 main {
   height: calc(100% - 40px);
   display: flex;

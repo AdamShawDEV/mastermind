@@ -77,21 +77,25 @@ function App() {
                     <img src="/images/yellowPeg.png" alt="yellow peg" />
                   </li>
                   <li>
-                    A green peg indicates a color in the correct position.
-                    <br />
+                    <p>
+                      A green peg indicates a color in the correct position.
+                    </p>
                     <img src="/images/greenPeg.png" alt="green peg" />
                   </li>
                   <li>
-                    No peg indicates a colour does not appear in the code.
-                    <br />
+                    <p>
+                      No peg indicates a colour does not appear in the code.
+                    </p>
                     <img src="/images/noPeg.png" alt="no peg" />
                   </li>
                 </ul>
               </li>
               <li>
-                The player continues to place rows of colors and receive
-                feedback until either the code is broken, or the player runs out
-                of guesses.
+                <p>
+                  The player continues to place rows of colors and receive
+                  feedback until either the code is broken, or the player runs
+                  out of guesses.
+                </p>
               </li>
             </ol>
             <h2>Examples</h2>

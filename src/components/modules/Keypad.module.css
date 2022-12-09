@@ -1,34 +1,34 @@
 .keypadRow {
-    height: 3rem;
-    padding: .4rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .key {
-    user-select: none;
-    cursor: pointer;
-    padding: .9rem;
-    min-width: fit-content;
-    max-width: 1.9rem;
-    flex-grow: 1;
-    background-color: #a2a2a2;
-    margin-right: .6rem;
-    border-radius: .4rem;
-    font-weight: 700;
-    transition: transform .2s, box-shadow .2s;
-    transform: translate(-.2rem, -.2rem);
-    box-shadow: 4px 4px 4px rgba(4, 3, 3, 0.524);
-  }
+  height: 3rem;
+  padding: 0.4rem;
+  display: flex;
+  justify-content: center;
+}
 
-  /* .key:hover {
+.key {
+  user-select: none;
+  cursor: pointer;
+  padding: 0.9rem;
+  min-width: fit-content;
+  max-width: 1.9rem;
+  flex-grow: 1;
+  background-color: #a2a2a2;
+  margin-right: 0.6rem;
+  border-radius: 0.4rem;
+  font-weight: 700;
+  transition: transform 0.2s, box-shadow 0.2s;
+  transform: translate(-0.2rem, -0.2rem);
+  box-shadow: 4px 4px 4px rgba(4, 3, 3, 0.524);
+}
+
+/* .key:hover {
     transform: translate(-.2rem, -.2rem);
     box-shadow: 4px 4px 4px rgba(4, 3, 3, 0.524);
     transition: transform .2s, box-shadow .2s;
   } */
 
-  .key:active {
-    transition: transform 0s, box-shadow 0s;
-    transform: translate(0, 0);
-    box-shadow: none;
-  }
+.key:active {
+  transition: transform 0s, box-shadow 0s;
+  transform: translate(0, 0);
+  box-shadow: none;
+}

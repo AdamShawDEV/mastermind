@@ -99,7 +99,25 @@ function App() {
               </li>
             </ol>
             <h2>Examples</h2>
-
+            <ul>
+              <li>
+                <img
+                  src="/images/oneGreenOneYellow.png"
+                  alt="one green one yellow"
+                />
+                <p>
+                  One colour in the right place, one color in the wrong place.
+                </p>
+              </li>
+              <li>
+                <img src="/images/threeGreen.png" alt="threeGreen" />
+                <p>Three colors in the write place.</p>
+              </li>
+              <li>
+                <img src="/images/fourGreen.png" alt="four green" />
+                <p>All colors in the right place.</p>
+              </li>
+            </ul>
             <button onClick={() => setShowInstructions(false)}>close</button>
           </Modal>
         )}

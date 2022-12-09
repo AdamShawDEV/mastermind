@@ -52,10 +52,15 @@ function App() {
             <p>
               The object of the game is to guess a secret code consisting of a
               series of 4 colors. Each guess results in feedback narrowing down
-              the possibilities of the code. To win solve the code within 10
-              guesses.
+              the possibilities of the secret code. To win solve the code within
+              10 guesses.
             </p>
             <h2>Layout</h2>
+            <img src="/images/gameBoard.png" alt="game board" />
+            <ol>
+              <li>Game Board</li>
+              <li>Color Keypad</li>
+            </ol>
 
             <h2>Gameplay</h2>
             <p>The game goes as follows:</p>
@@ -66,9 +71,13 @@ function App() {
                 <ul>
                   <li>
                     A yellow peg indicats the right color in the wrong position
+                    <br />
+                    <img src="/images/yellowPeg.png" alt="yellow peg" />
                   </li>
                   <li>
                     A green peg indicates a color in the correct position.
+                    <br />
+                    <img src="'images/greenPeg.png" alt="green peg" />
                   </li>
                   <li>No peg indicates a color does not appear in the code.</li>
                 </ul>

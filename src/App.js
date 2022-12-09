@@ -4,6 +4,7 @@ import { COLORS, NUM_COLS } from "./constants";
 import { useState, useEffect } from "react";
 import Modal from "./components/Modal";
 import Header from "./components/Header";
+import Button from "./components/Button";
 
 function newGame() {
   let out = [];
@@ -118,7 +119,7 @@ function App() {
                 <p>All colors in the right place.</p>
               </li>
             </ul>
-            <button onClick={() => setShowInstructions(false)}>close</button>
+            <Button onClick={() => setShowInstructions(false)}>close</Button>
           </Modal>
         )}
       </div>

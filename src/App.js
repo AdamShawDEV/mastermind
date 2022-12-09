@@ -70,8 +70,10 @@ function App() {
                 The game responds with 0-4 colored peds.
                 <ul>
                   <li>
-                    A yellow peg indicats the right color in the wrong position
-                    <br />
+                    <p>
+                      A yellow peg indicats the right color in the wrong
+                      position
+                    </p>
                     <img src="/images/yellowPeg.png" alt="yellow peg" />
                   </li>
                   <li>

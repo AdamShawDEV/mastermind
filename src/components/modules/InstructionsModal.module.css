@@ -1,6 +1,11 @@
 .instructions {
   padding: 0.8rem;
   max-width: 500px;
+  min-width: 300px;
+}
+
+.instructions img {
+  max-width: 100%;
 }
 
 .instructions > section {

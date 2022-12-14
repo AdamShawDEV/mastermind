@@ -1,0 +1,16 @@
+.buttonStyles {
+  color: #fff;
+  font-weight: 700;
+  background-color: #757575;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+.buttonStyles:hover {
+  background-color: #c4c4c4;
+}
+
+.buttonStyles:active {
+  background-color: #414141;
+}

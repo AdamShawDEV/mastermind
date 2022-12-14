@@ -1,0 +1,34 @@
+.instructions {
+  padding: 0.8rem;
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.instructions img {
+  max-width: 100%;
+}
+
+.instructions > section {
+  margin: 0.4rem 0;
+}
+
+.closeButton {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  position: absolute;
+  right: 0.8rem;
+  top: 0.8rem;
+  cursor: pointer;
+}
+
+.instructions ul li {
+  margin: 0.4rem;
+  list-style: none;
+}
+
+.instructions ul li:nth-child(2) {
+  padding: 0.4rem 0;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}

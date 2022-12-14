@@ -6,6 +6,7 @@ import Toast from "./Toast";
 import Modal from "./Modal";
 import styles from "./modules/MindGame.module.css";
 import useStats from "./hooks/useStats";
+import Button from "./Button";
 
 function MindGame({ startNewGame, answer }) {
   const [board, setBoard] = useState(() =>
@@ -188,9 +189,7 @@ function MindGame({ startNewGame, answer }) {
                 <span>{stats.maxStreak}</span>
               </div>
             </div>
-            <button className={styles.newGameButton} onClick={startNewGame}>
-              New Game
-            </button>
+            <Button onClick={startNewGame}>New Game</Button>
           </div>
         </Modal>
       )}
